@@ -6,7 +6,11 @@ class Customer {
         this.id = id;
         this.name = name;
     }
+    
     public String getName() { return name; }
+    
+    // 新增 getId() 方法，消除黃色警告
+    public String getId() { return id; }
 }
 
 class OrderItem {
@@ -19,6 +23,7 @@ class OrderItem {
         this.price = Math.max(price, 0);
         this.quantity = Math.max(quantity, 0);
     }
+    
     public double getSubtotal() { return price * quantity; }
     public int getQuantity() { return quantity; }
     public String getProductName() { return productName; }
@@ -54,20 +59,26 @@ class CustomerOrder {
     }
 
     public void printSummary() {
+        // 第一行輸出：訂單編號與顧客名稱
         System.out.println("訂單編號: " + orderId + " | 顧客: " + customer.getName());
+        
         int totalQuantity = 0;
         for (int i = 0; i < itemCount; i++) {
-            System.out.printf("- %s (數量: %d, 小計: %.2f)\n", 
+            // 使用 printf 與 %n 正確換行
+            System.out.printf("- %s (數量: %d, 小計: %.2f)%n", 
                     items[i].getProductName(), items[i].getQuantity(), items[i].getSubtotal());
             totalQuantity += items[i].getQuantity();
         }
-        System.out.printf("總品項數: %d | 訂單總額: %.2f\n", totalQuantity, calculateTotal());
+        
+        // 輸出總計，同樣使用 printf 與 %n
+        System.out.printf("總品項數: %d | 訂單總額: %.2f%n", totalQuantity, calculateTotal());
     }
 }
 
 public class CustomerOrderSystem {
     public static void main(String[] args) {
         System.out.println("=== 訂單與顧客管理測試 ===");
+        
         Customer customer = new Customer("C-123", "Bob");
         CustomerOrder order = new CustomerOrder("ORD-999", customer, 5);
         
