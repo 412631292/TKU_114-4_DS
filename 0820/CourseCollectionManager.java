@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 class CourseData {
     String studentId; String tag; int score;
@@ -56,12 +55,13 @@ public class CourseCollectionManager {
 
     public static void main(String[] args) {
         CourseCollectionManager manager = new CourseCollectionManager();
+        // 包含重複學號、同分與空白 tag 的 6 筆測試資料
         manager.add(new CourseData("S01", "Java", 95));
         manager.add(new CourseData("S02", "Web", 85));
-        manager.add(new CourseData("S01", "AI", 85)); // 重複學號
+        manager.add(new CourseData("S01", "AI", 85)); 
         manager.add(new CourseData("S03", "Java", 50));
-        manager.add(new CourseData("S04", "", 75)); // 空白 tag
-        manager.add(new CourseData("S05", "AI", 95)); // 同分
+        manager.add(new CourseData("S04", "", 75)); 
+        manager.add(new CourseData("S05", "AI", 95)); 
 
         System.out.println("成績分佈: " + manager.scoreDistribution());
         System.out.println("排名前三: " + manager.top(3));
